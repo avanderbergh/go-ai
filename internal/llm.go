@@ -3,9 +3,12 @@ package internal
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/ollama/ollama/api"
 )
+
+const model = "avanderbergh/gemma3-translator:4b"
 
 func Translate(text string) string {
 	client, err := api.ClientFromEnvironment()
@@ -15,7 +18,7 @@ func Translate(text string) string {
 	}
 
 	req := &api.GenerateRequest{
-		Model:  "gemma3",
+		Model:  model,
 		Prompt: Prompt + text,
 		Stream: new(bool),
 	}
@@ -32,6 +35,7 @@ func Translate(text string) string {
 
 	client.Generate(ctx, req, respFunc)
 
-	return translated
+	translated = strings.TrimSpace(translated)
 
+	return translated
 }

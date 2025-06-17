@@ -3,6 +3,7 @@ package cmd
 import (
 	"go-ai/internal"
 	"log"
+	"strings"
 	"time"
 
 	"github.com/go-vgo/robotgo"
@@ -27,6 +28,8 @@ func Run() {
 			return
 		}
 
+		text = strings.TrimSpace(text)
+
 		if text == "" {
 			log.Println("Clipboard is empty, nothing to translate.")
 			return
@@ -43,9 +46,9 @@ func Run() {
 		}
 
 		robotgo.WriteAll(translated)
-		time.Sleep(time.Millisecond * 200) // Allow clipboard to settle
+		time.Sleep(time.Millisecond * 200)
 		robotgo.KeyTap("v", "cmd")
-		log.Println("Translation pasted.")
+		log.Println("Translation pasted via clipboard.")
 	})
 
 	log.Println("Hotkey listener started. Press CMD+SHIFT+SPACE to trigger.")
