@@ -4,7 +4,7 @@ go 1.24.4
 
 require (
 	github.com/go-vgo/robotgo v0.110.8
-	github.com/ollama/ollama v0.9.0
+	github.com/ollama/ollama v0.9.1
 	github.com/robotn/gohook v0.42.2
 )
 
